@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Websockets </title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/styles.css" />
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div id="mario-chat">
+        <div id="chat-window">
+            <div id="output"></div>
+            <div id="feedback"></div>
+        </div>
+        
+        <input type="text" id="message" placeholder="Mensagem">
+        <button id="send">enviar</button>
+    </div>
+</body>
+<script>
+    // Make connection
+    var socket = io();
+
+    // Query DOM
+
+    var message = document.getElementById('message'),
+        btn = document.getElementById('send'),
+        output = document.getElementById('output'),
+        feedback = document.getElementById('feedback');
+
+    // Emit events
+    btn.addEventListener('click', function () {
+        socket.emit('chat', {
+            message: message.value
+        });
+        output.innerHTML += "<p><strong>producer:</strong> " + message.value + "</p>";
+    });
+
+</script>
+
+</html>
