@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Websockets </title>
+    <title>Consumidor</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles.css" />
     <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -15,21 +15,18 @@
             <div id="output"></div>
         </div>
 
-        <div id="status">Consumidor</button>
-        </div>
+        <div id="status">Escutando broker "localhost:9092"</div>
+    </div>
 
 </body>
 <script>
-    // Make connection
     var socket = io();
 
     var message = document.getElementById('message'),
-        handle = document.getElementById('handle'),
         chat = document.getElementById('chat-window');
 
-    // Listen for events
     socket.on('chat', function (data) {
-        output.innerHTML += "<p><strong>" + data.handle + ":</strong> " + data.message + "</p>";
+        output.innerHTML += "<p><strong>" + data.topic + ":</strong> " + data.message + "</p>";
 
         chat.scrollTop = chat.scrollHeight;
     });

@@ -8,12 +8,7 @@ var producer = new Kafka.Producer({
 });
 
 var topicName = 'test';
-var partition = -1;
-
-//logging debug messages, if debug is enabled
-// consumer.on('event.log', function (log) {
-//     console.log(log);
-// });
+var partition = -1; // pega a partição default
 
 //logging all errors
 producer.on('event.error', function (err) {
@@ -30,5 +25,5 @@ producer.on('ready', function (arg) {
 producer.connect();
 
 module.exports = function (msg) {
-    producer.produce(topicName, partition,  new Buffer(msg), null);    
+    producer.produce(topicName, partition,  new Buffer(msg), null);
 }

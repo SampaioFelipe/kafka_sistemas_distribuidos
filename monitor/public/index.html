@@ -3,45 +3,34 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Websockets </title>
+    <title>Monitor</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/style.css" />
     <script src="/socket.io/socket.io.js"></script>
 
-    <style>
-        body{
-            font-family: 'Nunito';
-        }
-    
-        #monitor {
-            margin: auto;
-            width: 50%;
-            border: 3px solid green;
-            padding: 10px;
-        }
-    </style>
 </head>
 
 <body>
     <div id="monitor">
-        <h1>0</h1>
-    </div>    
+        <h1 id="counter">0</h1>
+        <hr>
+        <p>Mensagens Recebidas</p>
+    </div>
 </body>
 
 <script>
-   // Make connection
-var socket = io();
+    var socket = io();
 
-var counter = 0;
+    var counter = 0;
 
-var monitor = document.getElementById('monitor');
+    var monitor = document.getElementById('counter');
 
-// Listen for events
-socket.on('chat', function (data) {
-    counter = counter + 1;
+    // Listen for events
+    socket.on('chat', function (data) {
+        counter = counter + 1;
 
-    console.log(counter);
+        monitor.innerHTML = counter;
 
-    monitor.innerHTML = "<h1>"+counter+"</h1>";
-
-});
+    });
 </script>
+
 </html>
